@@ -1,0 +1,59 @@
+@host = http://localhost:5219
+
+### The default store is in memory, so this needs nothing external.
+PUT {{host}}/files/hello/world.txt
+Content-Type: text/plain
+
+Hello from the object store.
+
+### Read it back.
+GET {{host}}/files/hello/world.txt
+
+### Everything under a prefix. Pages are fetched as the listing is read.
+GET {{host}}/files?prefix=hello/
+
+### Not found: the library throws ObjectNotFoundException, and the error-definitions mapper reports it as a
+### 404 with code OBJECT_NOT_FOUND. The response names no store, no bucket and no key.
+GET {{host}}/files/never-existed
+
+### A key that could climb out of the store's prefix is refused before anything is sent: 400 OBJECT_KEY_INVALID.
+### (In a path the web server would already have collapsed "..", so the key goes in the query string.)
+GET {{host}}/info?key=../secret
+
+### Idempotent: deleting what is not there is fine.
+DELETE {{host}}/files/hello/world.txt
+
+### A keyed store: [FromKeyedServices("avatars")] resolves the store configured under that name.
+PUT {{host}}/avatars/user-42
+Content-Type: image/png
+
+not really a png
+
+### A store name nobody configured: 500 OBJECT_STORE_FAILED. The store name is this service's own configuration, so a
+### wrong one is the service's bug, not something the caller can fix. Take the name from your code, not from a request.
+GET {{host}}/files?store=nope
+
+### Another store, picked by name.
+GET {{host}}/files?store=avatars
+
+### Presigned URLs need an S3 store. Uncomment "minio" in appsettings.json and start a server first. Against the
+### memory store this answers 500 OBJECT_STORE_FAILED: the service cannot do what it was asked.
+POST {{host}}/presign/upload?store=minio&key=direct/report.pdf&contentType=application/pdf
+
+### The client PUTs to the returned Url with exactly the returned RequiredHeaders, and no credentials of its own.
+POST {{host}}/presign/download?store=minio&key=direct/report.pdf&filename=report.pdf
+
+### A form, the one presigned upload the store holds to a size: at most 1 MiB of PNG.
+POST {{host}}/presign/form?store=minio&key=direct/avatar.png&maxBytes=1048576&contentType=image/png
+
+### Presigned multipart: start, sign a URL per part, let the client upload them, then complete with the ETags.
+POST {{host}}/multipart/start?store=minio&key=direct/big.bin&contentType=application/octet-stream
+
+###
+POST {{host}}/multipart/part-url?store=minio&key=direct/big.bin&uploadId=PASTE-THE-UPLOAD-ID&part=1
+
+###
+POST {{host}}/multipart/complete?store=minio
+Content-Type: application/json
+
+{ "key": "direct/big.bin", "uploadId": "PASTE-THE-UPLOAD-ID", "parts": [ { "partNumber": 1, "eTag": "PASTE-THE-ETAG" } ] }

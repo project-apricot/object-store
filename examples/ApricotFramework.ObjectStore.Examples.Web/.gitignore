@@ -1,0 +1,2 @@
+# Nothing is written to disk by the example, but a local S3 config with keys in it must never be committed.
+appsettings.Local.json

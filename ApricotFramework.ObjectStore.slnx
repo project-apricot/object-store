@@ -1,0 +1,18 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ApricotFramework.ObjectStore/ApricotFramework.ObjectStore.csproj" />
+    <Project Path="src/ApricotFramework.ObjectStore.S3/ApricotFramework.ObjectStore.S3.csproj" />
+    <Project Path="src/ApricotFramework.ObjectStore.DependencyInjection/ApricotFramework.ObjectStore.DependencyInjection.csproj" />
+    <Project Path="src/ApricotFramework.ObjectStore.ErrorDefinitions/ApricotFramework.ObjectStore.ErrorDefinitions.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <File Path="tests\.editorconfig" />
+    <Project Path="tests/ApricotFramework.ObjectStore.Tests/ApricotFramework.ObjectStore.Tests.csproj" />
+    <Project Path="tests/ApricotFramework.ObjectStore.S3.Tests/ApricotFramework.ObjectStore.S3.Tests.csproj" />
+    <Project Path="tests/ApricotFramework.ObjectStore.DependencyInjection.Tests/ApricotFramework.ObjectStore.DependencyInjection.Tests.csproj" />
+    <Project Path="tests/ApricotFramework.ObjectStore.ErrorDefinitions.Tests/ApricotFramework.ObjectStore.ErrorDefinitions.Tests.csproj" />
+  </Folder>
+  <Folder Name="/examples/">
+    <Project Path="examples/ApricotFramework.ObjectStore.Examples.Web/ApricotFramework.ObjectStore.Examples.Web.csproj" />
+  </Folder>
+</Solution>
