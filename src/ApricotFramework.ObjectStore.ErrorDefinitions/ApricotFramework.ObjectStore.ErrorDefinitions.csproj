@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Reports ApricotFramework.ObjectStore failures as RFC 9457 problem+json: an exception mapper that turns a missing object, a conflicting write or an unavailable store into a classified error, without leaking buckets, endpoints or keys.</Description>
+    <PackageTags>objectstore;storage;error-handling;problem-details;rfc9457;aspnetcore</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ApricotFramework.ErrorDefinitions.AspNetCore" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../ApricotFramework.ObjectStore/ApricotFramework.ObjectStore.csproj" />
+  </ItemGroup>
+
+</Project>

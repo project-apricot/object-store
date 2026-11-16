@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>AWS S3 and S3-compatible storage (MinIO, Ceph, R2 and others) for ApricotFramework.ObjectStore, built on the AWS SDK: bucket, prefix, endpoint and credentials read from the store's settings, presigned URLs and forms, multipart upload, and SDK errors translated into the library's own exceptions.</Description>
+    <PackageTags>objectstore;storage;s3;aws;minio;s3-compatible;presigned;multipart</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AWSSDK.S3" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="ApricotFramework.ObjectStore.S3.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../ApricotFramework.ObjectStore/ApricotFramework.ObjectStore.csproj" />
+  </ItemGroup>
+
+</Project>

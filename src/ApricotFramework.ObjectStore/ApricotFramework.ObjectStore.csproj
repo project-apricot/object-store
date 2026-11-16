@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Zero-dependency object storage for .NET: named stores that each bind one bucket and key prefix, a vendor-neutral contract for reading, writing, listing, copying and presigning, an in-memory store for tests, and exceptions that classify failures instead of leaking a vendor SDK's.</Description>
+    <PackageTags>objectstore;storage;blob;s3;presigned;multipart</PackageTags>
+  </PropertyGroup>
+
+</Project>
